@@ -83,4 +83,12 @@ public class Holiday implements Serializable {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    public boolean isPaidHoliday() {
+        return isPaidHoliday;
+    }
+
+    public void setPaidHoliday(boolean paidHoliday) {
+        isPaidHoliday = paidHoliday;
+    }
 }

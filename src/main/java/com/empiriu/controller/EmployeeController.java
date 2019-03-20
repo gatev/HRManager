@@ -38,14 +38,15 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeRepository.findAll(), HttpStatus.OK);
     }
 
-    @Secured("ROLE_USER")
+//    @Secured("ROLE_USER")
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/{employeeId}")
     public ResponseEntity<Optional> getEmployeeById(@PathVariable("employeeId") Long employeeId) throws EntityNotFoundException {
         logger.info("Get employee by ID mapping was called: ID: " + employeeId);
         try {
 //            return new ResponseEntity<>(employeeRepository.findById(employeeId), HttpStatus.OK);
-            return new ResponseEntity<>(employeeRepository.findById(employeeId), HttpStatus.OK);
+            Optional emp = employeeRepository.findById(employeeId);
+            return new ResponseEntity<>(emp, HttpStatus.OK);
         } catch (NoSuchElementException nsee) {
             logger.error("Not found user with id: " + employeeId);
             throw nsee;

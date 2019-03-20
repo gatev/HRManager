@@ -63,6 +63,10 @@ public class Employee implements Serializable {
     @Size(max = 25)
     private String position;
 
+    @NotNull
+    @Size(max = 14)
+    private String phone;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "employees_roles",
             joinColumns = @JoinColumn(name = "employee_id"),
@@ -174,5 +178,13 @@ public class Employee implements Serializable {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
