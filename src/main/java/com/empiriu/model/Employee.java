@@ -24,6 +24,7 @@ import java.util.Set;
         })
 })
 public class Employee implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id")
