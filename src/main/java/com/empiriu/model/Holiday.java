@@ -1,5 +1,6 @@
 package com.empiriu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.NaturalId;
 
@@ -27,8 +28,9 @@ public class Holiday implements Serializable {
     @Column(name = "is_paid")
     private boolean isPaidHoliday;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id", nullable = false)
+    @JsonIgnore
     private Employee employee;
 
     public Holiday() {

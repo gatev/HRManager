@@ -34,6 +34,10 @@ public class Employee implements Serializable {
     private String name;
 
     @NotBlank
+    @Size(max = 300)
+    private String imageUrl;
+
+    @NotBlank
     @Size(max = 15)
     private String username;
 
@@ -48,7 +52,16 @@ public class Employee implements Serializable {
     private String password;
 
     @NotNull
+    @Size(max = 100)
     private int daysOff;
+
+    @NotNull
+    @Size(max = 1)
+    private String sex;
+
+    @NotNull
+    @Size(max = 25)
+    private String position;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "employees_roles",
@@ -56,10 +69,8 @@ public class Employee implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "employee")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonIgnore
-    private Set<Holiday> holiday = new HashSet<>();
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Holiday> holiday;
 
     public Employee() {
 
@@ -127,5 +138,41 @@ public class Employee implements Serializable {
 
     public void setId(int daysOff) {
         this.daysOff = daysOff;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setDaysOff(int daysOff) {
+        this.daysOff = daysOff;
+    }
+
+    public Set<Holiday> getHoliday() {
+        return holiday;
+    }
+
+    public void setHoliday(Set<Holiday> holiday) {
+        this.holiday = holiday;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

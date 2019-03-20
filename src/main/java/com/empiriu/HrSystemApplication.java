@@ -15,12 +15,12 @@ import java.util.TimeZone;
 })
 public class HrSystemApplication {
 
-	@PostConstruct
-	void init() {
-		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-	}
+    @PostConstruct
+    void init() {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(HrSystemApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HrSystemApplication.class, args);
+    }
 }
