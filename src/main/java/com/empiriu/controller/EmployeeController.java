@@ -10,6 +10,7 @@ import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -37,7 +38,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeRepository.findAll(), HttpStatus.OK);
     }
 
-//    @Secured("ROLE_USER")
+    @Secured("ROLE_USER")
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "/{employeeId}")
     public ResponseEntity<Optional> getEmployeeById(@PathVariable("employeeId") Long employeeId) throws EntityNotFoundException {
