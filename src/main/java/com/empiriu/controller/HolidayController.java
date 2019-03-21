@@ -3,7 +3,7 @@ package com.empiriu.controller;
 import com.empiriu.model.Employee;
 import com.empiriu.model.Holiday;
 import com.empiriu.payload.HolidayDTO;
-import com.empiriu.repository.DayOffRequestRepository;
+import com.empiriu.repository.HolidayRepository;
 import com.empiriu.repository.EmployeeRepository;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
@@ -26,7 +26,7 @@ public class HolidayController {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    private DayOffRequestRepository dayOffRequestRepository;
+    private HolidayRepository dayOffRequestRepository;
 
     private static Log logger = LogFactory.getLog(HolidayController.class);
 

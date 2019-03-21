@@ -88,7 +88,7 @@ public class Holiday implements Serializable {
         return isPaidHoliday;
     }
 
-    public void setPaidHoliday(boolean paidHoliday) {
-        isPaidHoliday = paidHoliday;
+    public void setPaidHoliday(boolean isPaidHoliday) {
+        isPaidHoliday = isPaidHoliday;
     }
 }

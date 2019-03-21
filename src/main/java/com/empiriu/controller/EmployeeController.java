@@ -1,22 +1,15 @@
 package com.empiriu.controller;
 
-import com.empiriu.model.Holiday;
 import com.empiriu.model.Employee;
-import com.empiriu.payload.HolidayDTO;
-import com.empiriu.repository.DayOffRequestRepository;
 import com.empiriu.repository.EmployeeRepository;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
