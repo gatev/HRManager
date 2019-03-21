@@ -12,10 +12,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class EmployeePrincipal implements UserDetails {
+
     private Long id;
-
     private String name;
-
     private String username;
 
     @JsonIgnore
@@ -35,7 +34,7 @@ public class EmployeePrincipal implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static EmployeePrincipal create(Employee employee) {
+    public static EmployeePrincipal build(Employee employee) {
         List<GrantedAuthority> authorities = employee.getRoles().stream().map(role ->
                 new SimpleGrantedAuthority(role.getName().name())
         ).collect(Collectors.toList());
