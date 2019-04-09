@@ -7,6 +7,8 @@ import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -14,8 +16,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("api/employee")
+@RequestMapping("api")
 public class EmployeeController {
 
     private static Log logger = LogFactory.getLog(EmployeeController.class);
@@ -23,17 +26,15 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping(value = "/all")
-//    @Secured("ROLE_ADMIN")
+    @GetMapping(value = "employees")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Employee>> getAllEmployees() {
         logger.debug("Get all employees mapping was called");
         return new ResponseEntity<>(employeeRepository.findAll(), HttpStatus.OK);
     }
 
-//    @Secured("ROLE_USER")
-    @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping(value = "/{employeeId}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping(value = "employees/{employeeId}")
     public ResponseEntity<Optional> getEmployeeById(@PathVariable("employeeId") Long employeeId) throws EntityNotFoundException {
         logger.info("Get employee by ID mapping was called: ID: " + employeeId);
         try {

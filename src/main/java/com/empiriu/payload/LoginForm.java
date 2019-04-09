@@ -12,6 +12,8 @@ public class LoginForm {
     @Size(min = 6, max = 40)
     private String password;
 
+    private boolean isRememberMe;
+
     public String getUsername() {
         return username;
     }
@@ -26,5 +28,13 @@ public class LoginForm {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isRememberMe() {
+        return isRememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        isRememberMe = rememberMe;
     }
 }

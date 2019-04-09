@@ -12,20 +12,29 @@ import java.util.Date;
 public class JwtTokenProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    @Value("${grokonez.app.jwtSecret}")
+    @Value("${app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${grokonez.app.jwtExpiration}")
-    private int jwtExpiration;
+    private Long jwtExpiration;
 
-    public String generateToken(Authentication authentication) {
+    public String generateToken(Authentication authentication, boolean isRememberMe) {
 
         EmployeePrincipal userPrincipal = (EmployeePrincipal) authentication.getPrincipal();
+
+        Date expiration = null;
+
+        if (isRememberMe) {
+            // 30 days
+            jwtExpiration = 86400000L * 30;
+        } else {
+            // 30 minutes
+            jwtExpiration = 1800000L;
+        }
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpiration*1000))
+                .setExpiration(new Date((new Date()).getTime() + jwtExpiration))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
