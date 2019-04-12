@@ -82,14 +82,14 @@ public class AuthController {
 
         // Creating employee's account
         Employee employee = new Employee(signUpForm.getName(),
-                "https://questortech.com/wp-content/uploads/2018/07/placeholder-man.png",
+                "https://image.freepik.com/free-photo/elegant-man-with-thumbs-up_1149-1595.jpg",
                 signUpForm.getUsername(),
                 signUpForm.getEmail(),
                 passwordEncoder.encode(signUpForm.getPassword()),
                 20,
                 "m",
-                "Управител",
-                "0899103119");
+                signUpForm.getPosition(),
+                signUpForm.getPhone());
 
         Set<String> strRoles = signUpForm.getRole();
         Set<Role> roles = new HashSet<>();
