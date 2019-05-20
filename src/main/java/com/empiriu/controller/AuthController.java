@@ -35,21 +35,24 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-
-    @Autowired
     AuthenticationManager authenticationManager;
 
-    @Autowired
     EmployeeRepository employeeRepository;
 
-    @Autowired
     RoleRepository roleRepository;
 
-    @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Autowired
     JwtTokenProvider tokenProvider;
+
+    @Autowired
+    public AuthController(AuthenticationManager authenticationManager, EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtTokenProvider tokenProvider) {
+        this.authenticationManager = authenticationManager;
+        this.employeeRepository = employeeRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.tokenProvider = tokenProvider;
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginForm) {

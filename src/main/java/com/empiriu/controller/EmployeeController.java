@@ -23,8 +23,12 @@ public class EmployeeController {
 
     private static Log logger = LogFactory.getLog(EmployeeController.class);
 
-    @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    public EmployeeController(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     @GetMapping(value = "employees")
     @PreAuthorize("hasRole('ADMIN')")
