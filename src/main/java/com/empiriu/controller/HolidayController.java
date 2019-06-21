@@ -21,14 +21,20 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/holiday")
 public class HolidayController {
+    private static Log logger = LogFactory.getLog(HolidayController.class);
 
-    @Autowired
     private EmployeeRepository employeeRepository;
-
-    @Autowired
     private HolidayRepository dayOffRequestRepository;
 
-    private static Log logger = LogFactory.getLog(HolidayController.class);
+    @Autowired
+    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    @Autowired
+    public void setDayOffRequestRepository(HolidayRepository dayOffRequestRepository) {
+        this.dayOffRequestRepository = dayOffRequestRepository;
+    }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value = "/request")

@@ -17,16 +17,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthTokenFilter extends OncePerRequestFilter {
-    @Autowired
-    private JwtTokenProvider tokenProvider;
-
-    @Autowired
-    private EmployeeDetailsService еmployeeDetailsService;
-
-    @Autowired
-    EmployeeRepository employeeRepository;
-
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
+
+    private JwtTokenProvider tokenProvider;
+    private EmployeeRepository employeeRepository;
+    private EmployeeDetailsService employeeDetailsService;
+
+    @Autowired
+    public void setTokenProvider(JwtTokenProvider tokenProvider) {
+        this.tokenProvider = tokenProvider;
+    }
+
+    @Autowired
+    public void setEmployeeDetailsService(EmployeeDetailsService employeeDetailsService) {
+        this.employeeDetailsService = employeeDetailsService;
+    }
+    @Autowired
+    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -37,7 +46,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
             if (jwt != null && tokenProvider.validateToken(jwt)) {
                 String username = tokenProvider.getUserNameFromJwtToken(jwt);
 
-                UserDetails userDetails = еmployeeDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = employeeDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

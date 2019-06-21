@@ -23,11 +23,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         prePostEnabled = true
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    EmployeeDetailsService employeeDetailsService;
+
+    private EmployeeDetailsService employeeDetailsService;
+    private JwtAuthEntryPoint unauthorizedHandler;
 
     @Autowired
-    private JwtAuthEntryPoint unauthorizedHandler;
+    public void setEmployeeDetailsService(EmployeeDetailsService employeeDetailsService) {
+        this.employeeDetailsService = employeeDetailsService;
+    }
+
+    @Autowired
+    public void setUnauthorizedHandler(JwtAuthEntryPoint unauthorizedHandler) {
+        this.unauthorizedHandler = unauthorizedHandler;
+    }
 
     @Bean
     public JwtAuthTokenFilter jwtAuthenticationFilter() {

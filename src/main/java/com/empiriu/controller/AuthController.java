@@ -35,24 +35,49 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
 
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
-    JwtTokenProvider tokenProvider;
+    private JwtTokenProvider tokenProvider;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtTokenProvider tokenProvider) {
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
+    }
+
+    @Autowired
+    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
+    }
+
+    @Autowired
+    public void setRoleRepository(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Autowired
+    public void setTokenProvider(JwtTokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
+
+    //    @Autowired
+//    public AuthController(AuthenticationManager authenticationManager, EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtTokenProvider tokenProvider) {
+//        this.authenticationManager = authenticationManager;
+//        this.employeeRepository = employeeRepository;
+//        this.roleRepository = roleRepository;
+//        this.passwordEncoder = passwordEncoder;
+//        this.tokenProvider = tokenProvider;
+//    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginForm) {
