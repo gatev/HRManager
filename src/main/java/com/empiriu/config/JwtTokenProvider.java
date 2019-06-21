@@ -24,15 +24,13 @@ public class JwtTokenProvider {
         Date expiration = null;
 
         if (isRememberMe) {
-            // 30 days
-            jwtExpiration = 86400000L * 30;
+            jwtExpiration = 86400000L * 30; // 30 days
         } else {
-            // 30 minutes
-            jwtExpiration = 1800000L;
+            jwtExpiration = 1800000L; // 30 minutes
         }
 
         return Jwts.builder()
-                .setSubject((userPrincipal.getUsername()))
+                .setSubject((userPrincipal.getEmail()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpiration))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
