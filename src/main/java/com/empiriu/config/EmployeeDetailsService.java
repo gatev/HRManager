@@ -13,12 +13,8 @@ import javax.transaction.Transactional;
 @Service
 public class EmployeeDetailsService implements UserDetailsService {
 
-    private EmployeeRepository employeeRepository;
-
     @Autowired
-    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    private EmployeeRepository employeeRepository;
 
     @Override
     @Transactional

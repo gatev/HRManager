@@ -15,7 +15,6 @@ public class EmployeePrincipal implements UserDetails {
 
     private Long id;
     private String name;
-    private String username;
 
     @JsonIgnore
     private String email;
@@ -25,10 +24,9 @@ public class EmployeePrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public EmployeePrincipal(Long id, String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public EmployeePrincipal(Long id, String name, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
-        this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -42,7 +40,6 @@ public class EmployeePrincipal implements UserDetails {
         return new EmployeePrincipal(
                 employee.getId(),
                 employee.getName(),
-                employee.getUsername(),
                 employee.getEmail(),
                 employee.getPassword(),
                 authorities
@@ -63,7 +60,7 @@ public class EmployeePrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return null;
     }
 
     @Override
@@ -106,7 +103,6 @@ public class EmployeePrincipal implements UserDetails {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id);
     }
 }

@@ -98,10 +98,10 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpForm) {
-        if(employeeRepository.existsByUsername(signUpForm.getUsername())) {
-            return new ResponseEntity(new ResponseMessage("Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
-        }
+//        if(employeeRepository.existsByUsername(signUpForm.getUsername())) {
+//            return new ResponseEntity(new ResponseMessage("Username is already taken!"),
+//                    HttpStatus.BAD_REQUEST);
+//        }
 
         if(employeeRepository.existsByEmail(signUpForm.getEmail())) {
             return new ResponseEntity(new ResponseMessage("Email Address already in use!"),
@@ -111,7 +111,6 @@ public class AuthController {
         // Creating employee's account
         Employee employee = new Employee(signUpForm.getName(),
                 "https://image.freepik.com/free-photo/elegant-man-with-thumbs-up_1149-1595.jpg",
-                signUpForm.getUsername(),
                 signUpForm.getEmail(),
                 passwordEncoder.encode(signUpForm.getPassword()),
                 20,

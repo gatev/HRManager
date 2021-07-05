@@ -10,11 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "holiday_request")
-public class Holiday implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "request_id")
-    private Long id;
+public class Holiday extends BaseEntity {
 
     @Column(name = "start_date")
     private LocalDate startDate;
